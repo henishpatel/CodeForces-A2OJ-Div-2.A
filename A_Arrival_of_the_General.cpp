@@ -16,28 +16,26 @@ typedef pair<int, int> pi;
 #define pie 3.1415926535
 #define output(x) cout << ( x ? "YES" : "NO" ) << '\n' ;
 void solve(){
-    int n;
+    int n,ans=0;
     cin >> n;
-    vi arr(n);
+    int maxvalue=0,minvalue=1000,max_index=0,min_index=0;
     rep(i,0,n){
-        cin >> arr[i];
+        int x;
+        cin >> x;
+        if(x>maxvalue){
+            max_index = i;
+            maxvalue = x;
+        }
+        if(x<=minvalue){
+            min_index = i;
+            minvalue = x;
+        }
     }
-    map<int,int> m;
-    rep(i,0,n)
-    {
-        m[arr[i]]=i;
-    }
-    sort(all(arr));
-    int min = arr[0];
-    int max = arr[n-1];
-    int min_index = m[min];
-    int max_index = m[max];
-    int ans=0;
-    n--;
     if(max_index > min_index){
-        min_index++;
+        ans = (max_index-1) + (n-min_index) -1;
+    }else{
+        ans = (max_index -1) + (n-min_index);
     }
-    ans = (max_index + n - min_index);
     cout << ans;
 }
 
@@ -48,4 +46,5 @@ signed main(){
         solve();
     }
 }
+
 
